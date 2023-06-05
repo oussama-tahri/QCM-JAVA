@@ -1793,3 +1793,273 @@
     - **b) En utilisant le symbole "? extends Type" à la place d'un type spécifique lors de l'appel de la méthode**
     - c) En spécifiant le type générique entre chevrons ("< >") après le nom de l'interface
 ```
+
+
+# Exercice de compilation :
+
+```markdown
+**Exercice 1 :**
+```java
+public class GenericsExercise1 {
+
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>();
+        intBox.set(10);
+        
+        System.out.println(intBox.get());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. L'exercice déclare une classe générique `Box` qui contient une variable de type `T`. La méthode `set` assigne une valeur à la variable `value` et la méthode `get` retourne cette valeur.
+
+**Exercice 2 :**
+```java
+public class GenericsExercise2 {
+
+    public static void main(String[] args) {
+        Box<String> strBox = new Box<>();
+        strBox.set("Hello");
+        
+        System.out.println(strBox.get());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. Ici, la classe générique `Box` est instanciée avec le type `String`. La méthode `set` assigne une chaîne de caractères à la variable `value` et la méthode `get` retourne cette chaîne.
+
+
+**Exercice 3 :**
+```java
+public class GenericsExercise3 {
+
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>();
+        intBox.set("Hello");
+        
+        System.out.println(intBox.get());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code ne compile pas en raison d'une incompatibilité de types. La classe `Box` est déclarée avec le type générique `T` et la variable `value` est également de type `T`. Dans cet exercice, nous essayons de définir une valeur de type `String` dans une `Box<Integer>`, ce qui entraîne une erreur de compilation.
+
+**Exercice 4 :**
+```java
+public class GenericsExercise4 {
+
+    public static void main(String[] args) {
+        Box<Integer> intBox = new Box<>();
+        intBox.set(10);
+        
+        System.out.println(intBox.get().toUpperCase());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code ne compile pas car la méthode `toUpperCase()` n'est pas définie pour le type `T`. La classe `Box` est déclarée avec le type générique `T`, mais la méthode `toUpperCase()` appartient à la classe `String`. Par conséquent, l'appel de `toUpperCase()` sur la valeur de la `Box` entraîne une erreur de compilation.
+
+
+
+**Exercice 5 :**
+```java
+public class GenericsExercise5 {
+
+    public static void main(String[] args) {
+        Box<String> strBox = new Box<>();
+        strBox.set(10);
+        
+        System.out.println(strBox.get());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code ne compile pas en raison d'une incompatibilité de types. La classe `Box` est déclarée avec le type générique `T` et la variable `value` est également de type `T`. Dans cet exercice, nous essayons de définir une valeur de type `Integer` dans une `Box<String>`, ce qui entraîne une erreur de compilation.
+
+**Exercice 6 :**
+```java
+public class GenericsExercise6 {
+
+    public static void main(String[] args) {
+        Box<Object> objBox = new Box<>();
+        objBox.set("Hello");
+        
+        String value = objBox.get();
+        System.out.println(value.length());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. La classe `Box` est instanciée avec le type générique `Object`, qui est la superclasse de tous les types en Java. Ainsi, nous pouvons stocker une chaîne de caractères dans la `Box<Object>`. La méthode `get` retourne la valeur en tant qu'objet, et nous pouvons ensuite assigner cette valeur à une variable de type `String` et appeler des méthodes sur celle-ci.
+
+
+
+**Exercice 7 :**
+```java
+public class GenericsExercise7 {
+
+    public static void main(String[] args) {
+        Box<?> box = new Box<>("Hello");
+        
+        System.out.println(box.get());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public Box(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. La classe `Box` est instanciée avec le type générique `T`. Dans cet exercice, nous utilisons un caractère générique `?` pour la variable `box`, ce qui signifie que nous ne connaissons pas exactement le type de `box`. Cela permet de stocker une valeur de n'importe quel type dans `box` et de la récupérer avec la méthode `get()`.
+
+**Exercice 8 :**
+```java
+public class GenericsExercise8 {
+
+    public static void main(String[] args) {
+        Box<String> box = new Box<>();
+        box.set("Hello");
+        
+        System.out.println(box.get().length());
+    }
+}
+
+class Box<T> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. La classe `Box` est instanciée avec le type générique `String`. La méthode `set` assigne une chaîne de caractères à la variable `value` et la méthode `get` retourne cette chaîne. Dans cet exercice, nous appelons la méthode `length()` sur la valeur de la `Box`, qui est une chaîne de caractères.
+
+
+**Exercice 9 :**
+```java
+public class GenericsExercise9 {
+
+    public static void main(String[] args) {
+        Box<Number> numberBox = new Box<>();
+        numberBox.set(10);
+        
+        System.out.println(numberBox.get().doubleValue());
+    }
+}
+
+class Box<T extends Number> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. La classe `Box` est instanciée avec le type générique `T` qui est restreint à être une sous-classe de `Number`. Dans cet exercice, nous utilisons la méthode `doubleValue()` pour convertir la valeur de la `Box` en un double.
+
+**Exercice 10 :**
+```java
+public class GenericsExercise10 {
+
+    public static void main(String[] args) {
+        Box<String> box = new Box<>();
+        box.set("Hello");
+        
+        System.out.println(box.get().toLowerCase());
+    }
+}
+
+class Box<T extends CharSequence> {
+    private T value;
+
+    public void set(T value) {
+        this.value = value;
+    }
+
+    public T get() {
+        return value;
+    }
+}
+```
+**Solution :** Le code compile sans erreur. La classe `Box` est instanciée avec le type générique `T` qui est restreint à être une sous-interface de `CharSequence`, comme `String`. Dans cet exercice, nous appelons la méthode `toLowerCase()` sur la valeur de la `Box`, qui est une chaîne de caractères.
