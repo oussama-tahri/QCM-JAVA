@@ -1,6 +1,11 @@
 <h1 align="center">QCM-JAVA</h1>
 <br>
 
+<hr>
+<h4> QCM en Java sur divers sujets tels que les flux, les entrées/sorties, les interfaces graphiques, l'accès aux bases de données, le mapping XML, les threads, la programmation réseau et la généricité </h4>
+<hr>
+<br>
+
 ## LES FLUX : (LES ENTRÉES ET LES SORTIES)
 ```markdown
 1. Qu'est-ce qu'un flux en Java ?
