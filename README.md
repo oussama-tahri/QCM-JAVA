@@ -2066,126 +2066,12 @@ class Box<T extends CharSequence> {
 
 
 **Exercice 11 :**
+
 ```java
-public class GenericsExercise1<T extends Number> {
+public class GenericsExercise1<T> {
     private T value;
 
     public GenericsExercise1(T value) {
-        this.value = value;
-    }
-
-    public double square() {
-        return value.doubleValue() * value.doubleValue();
-    }
-
-    public static void main(String[] args) {
-        GenericsExercise1<Integer> intObj = new GenericsExercise1<>(5);
-        System.out.println(intObj.square());
-
-        GenericsExercise1<Double> doubleObj = new GenericsExercise1<>(2.5);
-        System.out.println(doubleObj.square());
-    }
-}
-```
-**Solution :** La classe `GenericsExercise1` est générique avec une contrainte de type `T extends Number`. Elle possède un constructeur qui accepte une valeur de type `T` et une méthode `square()` qui renvoie le carré de la valeur. Dans le `main()`, nous instancions la classe avec des types `Integer` et `Double` et appelons la méthode `square()` pour obtenir les carrés des valeurs.
-
-**Exercice 12 :**
-```java
-public class GenericsExercise2<T> {
-    private T[] array;
-
-    public GenericsExercise2(T[] array) {
-        this.array = array;
-    }
-
-    public void printArray() {
-        for (T element : array) {
-            System.out.println(element);
-        }
-    }
-
-    public static void main(String[] args) {
-        Integer[] intArray = {1, 2, 3, 4, 5};
-        GenericsExercise2<Integer> intObj = new GenericsExercise2<>(intArray);
-        intObj.printArray();
-
-        String[] strArray = {"Hello", "World"};
-        GenericsExercise2<String> strObj = new GenericsExercise2<>(strArray);
-        strObj.printArray();
-    }
-}
-```
-**Solution :** La classe `GenericsExercise2` est générique avec un type `T`. Elle possède un tableau `array` de type `T` et une méthode `printArray()` qui affiche tous les éléments du tableau. Dans le `main()`, nous instancions la classe avec des tableaux de types `Integer` et `String` et appelons la méthode `printArray()` pour afficher les éléments du tableau.
-
-**Exercice 13 :**
-```java
-import java.util.ArrayList;
-import java.util.List;
-
-public class GenericsExercise3 {
-
-    public static <T extends Comparable<T>> T max(List<T> list) {
-        if (list == null || list.isEmpty()) {
-            return null;
-        }
-
-        T max = list.get(0);
-        for (T element : list) {
-            if (element.compareTo(max) > 0) {
-                max = element;
-            }
-        }
-
-        return max;
-    }
-
-    public static void main(String[] args) {
-        List<Integer> intList = new ArrayList<>();
-        intList.add(5);
-        intList.add(10);
-        intList.add(3);
-        System.out.println("Max Integer: " + max(intList));
-
-        List<String> strList = new ArrayList<>();
-        strList.add("Apple");
-        strList.add("Banana");
-        strList.add("Carrot");
-        System.out.println("Max String: " + max(strList));
-    }
-}
-```
-**Solution :** La classe `GenericsExercise3` possède une méthode générique `max()` qui prend une liste de type
-
- `T` et renvoie l'élément maximum de la liste en utilisant la méthode `compareTo()` de l'interface `Comparable`. Dans le `main()`, nous appelons la méthode `max()` avec des listes d'entiers et de chaînes de caractères pour obtenir l'élément maximum de chaque liste.
-
-**Exercice 14 :**
-```java
-public class GenericsExercise4 {
-
-    public static <T> void printArray(T[] array) {
-        for (T element : array) {
-            System.out.println(element);
-        }
-    }
-
-    public static void main(String[] args) {
-        Integer[] intArray = {1, 2, 3, 4, 5};
-        printArray(intArray);
-
-        String[] strArray = {"Hello", "World"};
-        printArray(strArray);
-    }
-}
-```
-**Solution :** La classe `GenericsExercise4` possède une méthode générique `printArray()` qui prend un tableau de type `T` et affiche tous les éléments du tableau. Dans le `main()`, nous appelons la méthode `printArray()` avec des tableaux d'entiers et de chaînes de caractères pour les afficher.
-
-**Exercice 15 :**
-```java
-public class GenericsExercise5<T> {
-
-    private T value;
-
-    public void setValue(T value) {
         this.value = value;
     }
 
@@ -2194,163 +2080,274 @@ public class GenericsExercise5<T> {
     }
 
     public static void main(String[] args) {
-        GenericsExercise5<? extends Number> numberObj = new GenericsExercise5<>();
-        numberObj.setValue(10);
-        System.out.println(numberObj.getValue());
-
-        GenericsExercise5<? extends String> stringObj = new GenericsExercise5<>();
-        stringObj.setValue("Hello");
-        System.out.println(stringObj.getValue());
+        GenericsExercise1<String> obj = new GenericsExercise1<>(5);
+        System.out.println(obj.getValue());
     }
 }
 ```
-**Solution :** La classe `GenericsExercise5` possède une variable `value` de type générique `T` avec des accesseurs. Dans le `main()`, nous créons des instances de `GenericsExercise5` avec des types inconnus (`? extends Number` et `? extends String`). Nous utilisons ensuite les méthodes `setValue()` et `getValue()` pour définir et récupérer les valeurs. Le compilateur autorise ces opérations, mais le type exact de l'objet est inconnu.
 
-**Exercice 16 :**
-```java
-public class GenericsExercise6 {
+**Solution :** Le code ne va pas compiler. Lors de l'instanciation de `GenericsExercise1`, nous avons spécifié le type `String` pour le paramètre générique `T`, mais nous essayons de passer un entier (`5`) dans le constructeur. Les types ne correspondent pas, ce qui entraîne une erreur de compilation.
 
-    public static <T extends Comparable<T>> T max(T[] array) {
-        if (array == null || array.length == 0) {
-            return null;
-        }
+**Exercice 12 :**
 
-        T max = array[0];
-        for (int i = 1; i < array.length; i++) {
-            if (array[i].compareTo(max) > 0) {
-                max = array[i];
-            }
-        }
-
-        return max;
-    }
-
-    public static void main(String[] args) {
-        Integer[] intArray = {5, 10, 3, 8, 1};
-        System.out.println("Max Integer: " + max(intArray));
-
-        Double[] doubleArray = {2.5, 4.2, 1.8, 3.7};
-        System.out.println("Max Double: " + max(doubleArray));
-    }
-}
-```
-**Solution :** La classe `GenericsExercise6` possède une méthode générique `max()` qui prend un tableau de type `T` et renvoie l'élément maximum en utilisant la méthode `compareTo()` de l'interface `Comparable`. Dans le `main()`,
-
- nous appelons la méthode `max()` avec des tableaux d'entiers et de nombres à virgule flottante pour obtenir l'élément maximum de chaque tableau.
-
-**Exercice 17 :**
-```java
-public class GenericsExercise7<T> {
-
-    private T value;
-
-    public GenericsExercise7(T value) {
-        this.value = value;
-    }
-
-    public <U> void print(U obj) {
-        System.out.println(obj);
-    }
-
-    public static void main(String[] args) {
-        GenericsExercise7<String> stringObj = new GenericsExercise7<>("Hello");
-        stringObj.print("World");
-
-        GenericsExercise7<Integer> intObj = new GenericsExercise7<>(10);
-        intObj.print(20);
-    }
-}
-```
-**Solution :** La classe `GenericsExercise7` possède une variable `value` de type générique `T` et un constructeur qui accepte une valeur de type `T`. Elle possède également une méthode générique `print()` qui prend un argument de type `U` et l'affiche. Dans le `main()`, nous instancions la classe avec des types `String` et `Integer` et appelons la méthode `print()` avec des valeurs correspondantes.
-
-**Exercice 18 :**
 ```java
 import java.util.ArrayList;
 import java.util.List;
 
-public class GenericsExercise8 {
-
-    public static <T> void copy(List<? super T> dest, List<? extends T> src) {
-        for (T element : src) {
-            dest.add(element);
+public class GenericsExercise2 {
+    public static void printList(List<?> list) {
+        for (Object obj : list) {
+            System.out.println(obj);
         }
     }
 
     public static void main(String[] args) {
-        List<Integer> intList = new ArrayList<>();
-        intList.add(1);
-        intList.add(2);
-        intList.add(3);
-
-        List<Number> numberList = new ArrayList<>();
-        copy(numberList, intList);
-        System.out.println(numberList);
+        List<String> stringList = new ArrayList<>();
+        stringList.add("Hello");
+        stringList.add("World");
+        printList(stringList);
     }
 }
 ```
-**Solution :** La classe `GenericsExercise8` possède une méthode générique `copy()` qui prend une liste de destination de type `<? super T>` et une liste source de type `<? extends T>`. Elle copie les éléments de la liste source dans la liste de destination. Dans le `main()`, nous utilisons la méthode `copy()` pour copier les éléments d'une liste d'entiers dans une liste de nombres.
 
-**Exercice 19 :**
-```java
-public class GenericsExercise9<T> {
+**Solution :** Le code va compiler. La méthode `printList` utilise un wildcard `?` pour accepter une liste de n'importe quel type. Dans le `main()`, nous passons une liste de chaînes de caractères, ce qui est compatible avec le wildcard. Le code fonctionnera correctement et affichera les éléments de la liste.
 
-    private T value;
+**Exercice 13 :**
 
-    public GenericsExercise9(T value) {
-        this.value = value;
-    }
-
-    public <U> U getValue() {
-        return (U) value;
-    }
-
-    public static void main(String[] args) {
-        GenericsExercise9<String> stringObj = new GenericsExercise9<>("Hello");
-        String stringValue = stringObj.getValue();
-        System.out.println(stringValue);
-
-        GenericsExercise9<Integer> intObj = new GenericsExercise9<>(10);
-        Integer intValue = intObj.getValue();
-        System.out.println(intValue);
-    }
-}
-```
-**Solution :** La classe `GenericsExercise9` possède une variable `value` de type générique `T` et un constructeur qui accepte une valeur de type `T`. Elle possède également une méthode générique `getValue()` qui renvoie la valeur convertie en type `U`. Dans le `main()`, nous instancions la classe avec des types `String` et `Integer` et appelons la méthode `getValue()` pour obtenir les valeurs correspondantes.
-
-**Exercice 20 :**
 ```java
 import java.util.ArrayList;
-import java
+import java.util.List;
 
-.util.List;
+public class GenericsExercise3<T> {
+    private List<T> list = new ArrayList<>();
 
-public class GenericsExercise10 {
+    public void add(T element) {
+        list.add(element);
+    }
 
-    public static <T> List<T> filter(List<T> list, Predicate<? super T> predicate) {
-        List<T> result = new ArrayList<>();
-        for (T element : list) {
-            if (predicate.test(element)) {
-                result.add(element);
-            }
-        }
-        return result;
+    public T get(int index) {
+        return list.get(index);
     }
 
     public static void main(String[] args) {
-        List<Integer> intList = new ArrayList<>();
-        intList.add(1);
-        intList.add(2);
-        intList.add(3);
-        intList.add(4);
-        intList.add(5);
-
-        Predicate<Integer> evenPredicate = num -> num % 2 == 0;
-        List<Integer> evenNumbers = filter(intList, evenPredicate);
-        System.out.println(evenNumbers);
+        GenericsExercise3<String> obj = new GenericsExercise3<>();
+        obj.add(10);
+        System.out.println(obj.get(0));
     }
 }
 ```
-**Solution :** La classe `GenericsExercise10` possède une méthode générique `filter()` qui prend une liste de type `T` et un prédicat de type `Predicate<? super T>`. Elle renvoie une nouvelle liste contenant uniquement les éléments qui satisfont le prédicat. Dans le `main()`, nous utilisons la méthode `filter()` pour filtrer les nombres pairs d'une liste d'entiers.
+
+**Solution :** Le code ne va pas compiler. Lors de l'appel à la méthode `add`, nous essayons d'ajouter un entier (`10`) à une liste de chaînes de caractères. Les types ne correspondent pas, ce qui entraîne une erreur de compilation.
+
+**Exercice 14 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise4<T> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(T element) {
+        list.add(element);
+    }
+
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise4<?> obj = new GenericsExercise4<>();
+        obj.add("Hello");
+        System.out.println(obj.get(0));
+    }
+}
+```
+
+**Solution :** Le code va compiler. Lorsque nous utilisons le wildcard `?`, cela signifie que nous n'avons pas d'information spécifique sur le type générique. Dans ce cas, nous pouvons ajouter des éléments à la liste, mais nous ne pouvons pas récupérer les éléments avec un type spécifique. Le
+
+ code fonctionnera correctement et affichera "Hello".
+
+**Exercice 15 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise5<T extends Number> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(T element) {
+        list.add(element);
+    }
+
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise5<Integer> obj = new GenericsExercise5<>();
+        obj.add(10.5);
+        System.out.println(obj.get(0));
+    }
+}
+```
+
+**Solution :** Le code ne va pas compiler. La contrainte de type `<T extends Number>` indique que le type générique `T` doit être une sous-classe de `Number`. Dans le `main()`, nous essayons d'ajouter un nombre à virgule flottante (`10.5`) dans une liste de nombres entiers (`GenericsExercise5<Integer>`). Les types ne correspondent pas, ce qui entraîne une erreur de compilation.
+
+**Exercice 16 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise6<T> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(List<? extends T> elements) {
+        list.addAll(elements);
+    }
+
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise6<Number> obj = new GenericsExercise6<>();
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(10);
+        obj.add(integerList);
+        System.out.println(obj.get(0));
+    }
+}
+```
+
+**Solution :** Le code va compiler. La méthode `add` accepte une liste de n'importe quel type qui est une sous-classe de `T` (défini comme `List<? extends T>`). Dans le `main()`, nous ajoutons une liste d'entiers (`List<Integer>`) à une instance de `GenericsExercise6<Number>`. Comme `Integer` est une sous-classe de `Number`, cela fonctionne correctement. Le code affichera "10".
+
+**Exercice 17 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise7<T> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(List<? super T> elements) {
+        list.addAll(elements);
+    }
+
+    public T get(int index) {
+        return list.get(index);
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise7<Integer> obj = new GenericsExercise7<>();
+        List<Number> numberList = new ArrayList<>();
+        numberList.add(10);
+        obj.add(numberList);
+        System.out.println(obj.get(0));
+    }
+}
+```
+
+**Solution :** Le code va compiler. La méthode `add` accepte une liste de n'importe quel type qui est une super-classe de `T` (défini comme `List<? super T>`). Dans le `main()`, nous ajoutons une liste de nombres (`List<Number>`) à une instance de `GenericsExercise7<Integer>`. Comme `Number` est une super-classe de `Integer`, cela fonctionne correctement. Le code affichera "10".
+
+**Exercice 18 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise8<T extends Comparable<T>> {
+    private List<T> list = new ArrayList<>();
+
+    public
+
+ void add(T element) {
+        list.add(element);
+    }
+
+    public T getMax() {
+        T max = list.get(0);
+        for (int i = 1; i < list.size(); i++) {
+            if (list.get(i).compareTo(max) > 0) {
+                max = list.get(i);
+            }
+        }
+        return max;
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise8<String> obj = new GenericsExercise8<>();
+        obj.add("Hello");
+        obj.add("World");
+        System.out.println(obj.getMax());
+    }
+}
+```
+
+**Solution :** Le code va compiler. La contrainte de type `<T extends Comparable<T>>` indique que le type générique `T` doit implémenter l'interface `Comparable<T>`. Dans le `main()`, nous utilisons `GenericsExercise8<String>`, et la classe `String` implémente l'interface `Comparable<String>`. Par conséquent, le code fonctionnera correctement et affichera la chaîne de caractères la plus grande (selon l'ordre lexicographique).
+
+**Exercice 19 :**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise9<T> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(T element) {
+        list.add(element);
+    }
+
+    public void process(List<? extends T> elements) {
+        for (T element : elements) {
+            System.out.println(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise9<Number> obj = new GenericsExercise9<>();
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(10);
+        obj.process(integerList);
+    }
+}
+```
+
+**Solution :** Le code va compiler. La méthode `process` accepte une liste de n'importe quel type qui est une sous-classe de `T` (défini comme `List<? extends T>`). Dans le `main()`, nous passons une liste d'entiers (`List<Integer>`) à une instance de `GenericsExercise9<Number>`. Comme `Integer` est une sous-classe de `Number`, cela fonctionne correctement. Le code affichera "10".
+
+**Exercice 20:**
+
+```java
+import java.util.ArrayList;
+import java.util.List;
+
+public class GenericsExercise10<T> {
+    private List<T> list = new ArrayList<>();
+
+    public void add(T element) {
+        list.add(element);
+    }
+
+    public <E> void process(List<E> elements) {
+        for (E element : elements) {
+            System.out.println(element);
+        }
+    }
+
+    public static void main(String[] args) {
+        GenericsExercise10<String> obj = new GenericsExercise10<>();
+        List<Integer> integerList = new ArrayList<>();
+        integerList.add(10);
+        obj.process(integerList);
+    }
+}
+```
+
+**Solution :** Le code va compiler. La méthode `process` utilise une nouvelle variable de type générique `<E>` qui est différente du type générique de la classe `<T>`. Dans le `main()`, nous passons une liste d'entiers (`List<Integer>`) à une instance de `GenericsExercise10<String>`. Bien que les types génériques diffèrent, cela n'affecte pas la compilation car ils sont utilisés indépendamment l'un de l'autre. Le code affichera "10".
 
 
 **Exercice 21 :**
