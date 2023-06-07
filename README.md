@@ -2,7 +2,7 @@
 <br>
 
 <hr>
-<h4> QCM en Java sur divers sujets tels que les flux, les entrées/sorties, les interfaces graphiques, l'accès aux bases de données, le mapping XML, les threads, la programmation réseau et la généricité  + 10 exercices de compilation sur la généricité en Java, avec des solutions détaillées</h4>
+<h4> QCM en Java sur divers sujets tels que les flux, les entrées/sorties, les interfaces graphiques, l'accès aux bases de données, le mapping XML, les threads, la programmation réseau et la généricité  + 30 exercices de compilation sur la généricité en Java, avec des solutions détaillées</h4>
 <hr>
 <br>
 
